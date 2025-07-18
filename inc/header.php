@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const toggle = document.getElementById("menu-toggle");
