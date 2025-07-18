@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquanote</title>
     <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -43,8 +42,8 @@
 <body>
 <header>
     <div class="contenedor">
-    <a class="logo" href="/proyectos/aquanote/index.php">
-        <img src="/proyectos/aquanote/img/logo-horizontal.svg" alt="Aquanote" height="40">
+    <a class="logo" href="/index.php">
+        <img src="/img/logo-horizontal.svg" alt="tankily" height="40">
     </a>
     <?php 
     $page = basename($_SERVER['PHP_SELF']);
@@ -52,14 +51,14 @@
         <div class="menu-contenedor" id="menu-contenedor">
             <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
             <div class="menu-dropdown">
-                <a href="/proyectos/aquanote/usuarios/mis_acuarios.php">Acuarios</a>
-                <a href="/proyectos/aquanote/usuarios/mi_cuenta.php">Mi cuenta</a>
-                <a href="/proyectos/aquanote/logout.php" style="color:#AD2222">Cerrar sesión</a>
+                <a href="/usuarios/mis_acuarios.php">Mis cuarios</a>
+                <a href="/usuarios/mi_cuenta.php">Mi cuenta</a>
+                <a href="/logout.php" style="color:#AD2222">Cerrar sesión</a>
             </div>
         </div>
     <?php else: ?>
         <div class="volver-index">
-            <a href="/proyectos/aquanote/index.php">&larr; Volver sin guardar</a>
+            <a href="/index.php">&larr; Volver sin guardar</a>
         </div>
     <?php endif; ?>
 </div>

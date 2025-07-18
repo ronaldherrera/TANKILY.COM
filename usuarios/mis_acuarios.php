@@ -1,7 +1,7 @@
 <?php
-require_once '../config.php';
-require_once '../inc/auth.php';
-include '../inc/header.php';
+require_once '/config.php';
+require_once '/inc/auth.php';
+include '/inc/header.php';
 
 // Obtener acuarios del usuario
 $stmt = $db->prepare("SELECT * FROM acuarios WHERE usuario_id = ?");
@@ -23,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Acuarios</title>
-    <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <main class="mis-acuarios">
     <h1>Mis Acuarios</h1>
-    <a href="../usuarios/config_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
+    <a href="./config_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
     <ul class="lista-acuarios">
         <?php foreach ($acuarios as $a): ?>
             <li>
@@ -44,4 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 </body>
 </html>
-<?php include '../inc/footer.php'; ?>
+<?php include '/inc/footer.php'; ?>
