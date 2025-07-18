@@ -58,7 +58,7 @@
         </div>
     <?php else: ?>
         <div class="volver-index">
-            <a href="/index.php">&larr; Volver sin guardar</a>
+            <a href="#" onclick="history.back(); return false;">&larr; Volver</a>
         </div>
     <?php endif; ?>
 </div>
