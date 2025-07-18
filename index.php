@@ -1,6 +1,6 @@
 <?php
-require_once '/inc/auth.php';
-include '/inc/header.php';
+require_once 'inc/auth.php';
+include 'inc/header.php';
 ?>
 <html lang="es">
 <head>
