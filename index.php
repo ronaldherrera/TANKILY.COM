@@ -1,6 +1,6 @@
 <?php
-require_once 'inc/auth.php';
-include 'inc/header.php';
+require_once '/inc/auth.php';
+include '/inc/header.php';
 ?>
 <html lang="es">
 <head>
@@ -13,7 +13,7 @@ include 'inc/header.php';
 <main class="index">
     <h1>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
     <p>Este será tu panel de control de Acuario. Aquí verás tus últimos registros y tareas pendientes.</p>
-    <a href="logout.php">Cerrar sesión</a>
+    <a href="/logout.php">Cerrar sesión</a>
     <ul>
             <li><a href="./usuarios/mis_acuarios.php">Configurar acuario</a></li>
             <li><a href="./usuarios/mi_cuenta.php">Mi cuenta</a></li>
@@ -22,4 +22,4 @@ include 'inc/header.php';
 </body>
 </html>
 
-<?php include 'inc/footer.php'; ?>
+<?php include '/inc/footer.php'; ?>
