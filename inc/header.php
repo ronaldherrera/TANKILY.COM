@@ -47,7 +47,7 @@
     </a>
     <?php 
     $page = basename($_SERVER['PHP_SELF']);
-    if ($page !== 'mi_cuenta.php' && $page !== 'mi_acuario.php') : ?>
+    if ($page !== 'mi_cuenta.php' && $page !== 'config_acuario.php' && $page !== 'mis_acuarios.php') : ?>
         <div class="menu-contenedor" id="menu-contenedor">
             <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
             <div class="menu-dropdown">
