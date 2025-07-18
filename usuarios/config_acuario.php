@@ -132,9 +132,16 @@ $presets = [
 ];
 
 
-$stmt = $db->prepare("SELECT * FROM acuarios WHERE usuario_id = ? LIMIT 1");
-$stmt->execute([$_SESSION['usuario_id']]);
-$acuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$id = $_GET['id'] ?? null;
+
+if ($id) {
+    $stmt = $db->prepare("SELECT * FROM acuarios WHERE id = ? AND usuario_id = ?");
+    $stmt->execute([$id, $_SESSION['usuario_id']]);
+    $acuario = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    $acuario = null;
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim($_POST['nombre'] ?? '');
