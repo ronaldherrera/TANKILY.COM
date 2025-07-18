@@ -201,7 +201,7 @@ $parametros_seleccionados = $acuario ? json_decode($acuario['parametros'], true)
                 </label>
                 
                 <label class="inicio">Inicio:
-                    <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
+                    <input type="date" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" required>
                 </label>
             
                 <label class="notas">Notas:

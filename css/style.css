@@ -82,6 +82,7 @@ header .volver-index a:hover {
   padding: 6px;
   background-color: #39B6C6;
   gap: 3px;
+  user-select: none;
 }
 
 .menu-toggle span {

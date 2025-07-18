@@ -32,7 +32,6 @@
                     link.addEventListener("click", () => {
                         container.classList.remove("abierto");
                         dropdown.classList.remove("abierto");
-
                     });
                 });
             }
@@ -58,7 +57,13 @@
         </div>
     <?php else: ?>
         <div class="volver-index">
-            <a href="#" onclick="history.back(); return false;">&larr; Volver</a>
+            <?php if ($page === 'mis_acuarios.php'): ?>
+                <a href="/index.php">&larr; Volver a inicio</a>
+            <?php elseif ($page === 'config_acuario.php'): ?>
+                <a href="/usuarios/mis_acuarios.php">&larr; Cancelar y volver</a>
+            <?php else: ?>
+                <a href="#" onclick="history.back(); return false;">&larr; Volver</a>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
