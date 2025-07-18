@@ -129,6 +129,7 @@ header .volver-index a:hover {
   z-index: 999;
   overflow: hidden;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .menu-dropdown.abierto {
