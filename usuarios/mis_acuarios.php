@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach ($acuarios as $a): ?>
             <li>
                 <strong><?= htmlspecialchars($a['nombre']) ?></strong> (<?= ucfirst(str_replace('_', ' ', $a['tipo'])) ?>)
-                <a href="configuracion_acuario.php?id=<?= $a['id'] ?>">Editar</a>
+                <a href="config_acuario.php?id=<?= $a['id'] ?>">Editar</a>
                 <form method="POST" onsubmit="return confirm('¿Eliminar este acuario?')" style="display:inline">
                     <input type="hidden" name="eliminar" value="<?= $a['id'] ?>">
                     <button type="submit" class="eliminar">🗑️ Eliminar</button>
