@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$_SESSION['usuario_id'], $nombre, $tipo, $volumen, $fecha_inicio, $notas, $parametros_json]);
     }
 
-    header("Location: mi_acuario.php");
+    header("Location: mis_acuarios.php");
     exit;
 }
 
