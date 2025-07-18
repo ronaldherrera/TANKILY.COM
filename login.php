@@ -1,5 +1,5 @@
 <?php
-require_once '/config.php';
+require_once 'config.php';
 session_start();
 
 $errores = [];
@@ -60,4 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 </body>
 </html>
-<?php include '/inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
