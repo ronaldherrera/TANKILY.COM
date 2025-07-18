@@ -1,7 +1,7 @@
 <?php
-require_once 'config.php';
-require_once 'inc/auth.php';
-include 'inc/header.php';
+require_once '/config.php';
+require_once '/inc/auth.php';
+include '/inc/header.php';
 
 // Obtener acuarios del usuario
 $stmt = $db->prepare("SELECT * FROM acuarios WHERE usuario_id = ?");
@@ -44,4 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 </body>
 </html>
-<?php include 'inc/footer.php'; ?>
+<?php include '/inc/footer.php'; ?>
