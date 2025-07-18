@@ -23,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Acuarios</title>
-    <link rel="stylesheet" href="/proyectos/aquanote/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <main class="mis-acuarios">
     <h1>Mis Acuarios</h1>
-    <a href="../usuarios/config_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
+    <a href="./usuarios/config_acuario.php" class="boton">➕ Añadir nuevo acuario</a>
     <ul class="lista-acuarios">
         <?php foreach ($acuarios as $a): ?>
             <li>

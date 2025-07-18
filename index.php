@@ -6,7 +6,7 @@ include 'inc/header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tankily|Home</title>
+    <title>Tankily | Home</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="index">
