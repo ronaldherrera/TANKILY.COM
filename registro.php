@@ -6,20 +6,33 @@ $errores = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pais = trim($_POST['pais'] ?? '');
     $edad = intval($_POST['edad'] ?? 0);
+  $nacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nacimiento);
+$edad = (new DateTime())->diff($nacimiento)->y;
+
     $nombre = trim($_POST['nombre'] ?? '');
     $username = strtolower(trim($_POST['username'] ?? ''));
     $username = preg_replace("/[^a-z0-9_.-]/", "", $username);
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirmar_password = $_POST['confirmar_password'] ?? '';
+  
 
     // Validaciones básicas
     if ($pais === '') $errores[] = 'El país es obligatorio';
-    if ($edad <= 0) $errores[] = 'La edad debe ser un número positivo';
+    if ($edad < 18) $errores[] = 'Debes tener al menos 18 años para registrarte';
     if ($nombre === '') $errores[] = 'El nombre es obligatorio';
     if (!preg_match("/^[a-z0-9_.-]+$/", $username)) $errores[] = 'El nombre de usuario solo puede contener minúsculas, números, guiones (-), guiones bajos (_) y puntos (.)';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = 'Email no válido';
-    if (strlen($password) < 6) $errores[] = 'La contraseña debe tener al menos 6 caracteres';
+    if (
+    strlen($password) < 6 ||
+    !preg_match('/[A-Z]/', $password) ||
+    !preg_match('/[a-z]/', $password) ||
+    !preg_match('/\d/', $password) ||
+    !preg_match('/[^a-zA-Z\d]/', $password)
+) {
+    $errores[] = 'La contraseña debe tener al menos 6 caracteres e incluir una mayúscula, una minúscula, un número y un carácter especial';
+}
+
     if ($password !== $confirmar_password) $errores[] = 'Las contraseñas no coinciden';
 
     // Comprobar unicidad de username y email
@@ -59,65 +72,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.querySelector('form');
-        const inputs = form.querySelectorAll('input, select');
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const input = document.getElementById(btn.dataset.target);
+            if (input) {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                const svgVisible = '<img src="./img/icons/ojo-visible.svg" alt="Mostrar">';
+                const svgHidden = '<img src="./img/icons/ojo-oculto.svg" alt="Ocultar">';
 
-        inputs.forEach((input) => {
-            input.addEventListener('blur', () => {
-                if (!input.checkValidity()) {
-                    input.classList.add('input-error');
-                    input.classList.remove('input-success');
-                    let tooltip = input.nextElementSibling;
-                    if (tooltip && tooltip.classList.contains('tooltip-error')) {
-                        tooltip.textContent = input.validationMessage;
-                        tooltip.style.display = 'block';
-                    }
-                } else {
-                    input.classList.remove('input-error');
-                    input.classList.add('input-success');
-                    let tooltip = input.nextElementSibling;
-                    if (tooltip && tooltip.classList.contains('tooltip-error')) {
-                        tooltip.style.display = 'none';
-                    }
-                }
-            });
-        });
-
-        const usernameInput = form.querySelector('input[name="username"]');
-        usernameInput.addEventListener('input', () => {
-            const value = usernameInput.value.trim();
-            const pattern = /^[a-z0-9_.-]+$/;
-            const tooltip = usernameInput.nextElementSibling;
-            if (!pattern.test(value)) {
-                usernameInput.setCustomValidity('El nombre de usuario solo puede contener minúsculas, números, guiones (-), guiones bajos (_) y puntos (.)');
-                usernameInput.classList.add('input-error');
-                usernameInput.classList.remove('input-success');
-                if (tooltip && tooltip.classList.contains('tooltip-error')) {
-                    tooltip.textContent = usernameInput.validationMessage;
-                    tooltip.style.display = 'block';
-                }
-            } else {
-                usernameInput.setCustomValidity('');
-                usernameInput.classList.remove('input-error');
-                usernameInput.classList.add('input-success');
-                if (tooltip && tooltip.classList.contains('tooltip-error')) {
-                    tooltip.style.display = 'none';
-                }
-            }
-        });
-
-        usernameInput.addEventListener('invalid', (e) => {
-            e.preventDefault(); // Evita el tooltip nativo
-            usernameInput.classList.add('input-error');
-            usernameInput.classList.remove('input-success');
-            let tooltip = usernameInput.nextElementSibling;
-            if (tooltip && tooltip.classList.contains('tooltip-error')) {
-                tooltip.textContent = usernameInput.validationMessage;
-                tooltip.style.display = 'block';
+              
+              btn.innerHTML = isPassword ? svgHidden : svgVisible;
             }
         });
     });
+    const form = document.querySelector('form');
+
+        const passwordInput = document.querySelector('input[name="password"]');
+        passwordInput.addEventListener('input', () => {
+    const value = passwordInput.value;
+    const tooltip = passwordInput.parentElement.querySelector('.tooltip-error');
+    const hasLength = value.length >= 6;
+    const hasUpper = /[A-Z]/.test(value);
+    const hasLower = /[a-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasSpecial = /[^a-zA-Z\d]/.test(value);
+
+    if (!(hasLength && hasUpper && hasLower && hasNumber && hasSpecial)) {
+        passwordInput.setCustomValidity('Debe contener al menos 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial');
+        passwordInput.classList.add('input-error');
+        passwordInput.classList.remove('input-success');
+        if (tooltip && tooltip.classList.contains('tooltip-error')) {
+            tooltip.textContent = passwordInput.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        passwordInput.setCustomValidity('');
+        passwordInput.classList.remove('input-error');
+        passwordInput.classList.add('input-success');
+        if (tooltip && tooltip.classList.contains('tooltip-error')) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+        const confirmPasswordInput = document.querySelector('input[name="confirmar_password"]');
+        const checkPasswordMatch = () => {
+    const passwordValue = passwordInput.value;
+    const confirmValue = confirmPasswordInput.value;
+    const tooltip = confirmPasswordInput.parentElement.querySelector('.tooltip-error');
+
+    if (confirmValue !== '') {
+        if (confirmValue !== passwordValue) {
+            confirmPasswordInput.setCustomValidity('Las contraseñas no coinciden');
+            confirmPasswordInput.classList.add('input-error');
+            confirmPasswordInput.classList.remove('input-success');
+            if (tooltip && tooltip.classList.contains('tooltip-error')) {
+                tooltip.textContent = confirmPasswordInput.validationMessage;
+                tooltip.style.display = 'block';
+            }
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+            confirmPasswordInput.classList.remove('input-error');
+            confirmPasswordInput.classList.add('input-success');
+            if (tooltip && tooltip.classList.contains('tooltip-error')) {
+                tooltip.style.display = 'none';
+            }
+        }
+    } else {
+        confirmPasswordInput.setCustomValidity('');
+        confirmPasswordInput.classList.remove('input-error');
+        confirmPasswordInput.classList.remove('input-success');
+        if (tooltip && tooltip.classList.contains('tooltip-error')) {
+            tooltip.style.display = 'none';
+        }
+    }
+};
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+        passwordInput.addEventListener('input', checkPasswordMatch);
+
+    });
 </script>
+
 </head>
 <body class="registro">
 <main class="registro">
@@ -151,7 +188,7 @@ foreach ($paises as $p) {
                 </select>
             </label>
             <label>Edad:
-    <input type="number" name="edad" min="1" required autocomplete="off">
+    <input type="date" name="edad" min="18" required autocomplete="off">
     <span class="tooltip-error"></span>
             </label>
         </div>
@@ -168,11 +205,18 @@ foreach ($paises as $p) {
     <span class="tooltip-error"></span>
         </label>
         <label>Contraseña:
-    <input type="password" name="password" required autocomplete="new-password">
+    <input type="password" name="password" id="password" required autocomplete="new-password">
+    <button type="button" class="toggle-password" data-target="password">
+      <img src="./img/icons/ojo-visible.svg" alt="Mostrar">
+</button>
     <span class="tooltip-error"></span>
         </label>
         <label>Confirmar contraseña:
-    <input type="password" name="confirmar_password" required autocomplete="new-password">
+    <input type="password" name="confirmar_password" id="confirmar_password" required autocomplete="new-password">
+
+    <button type="button" class="toggle-password" data-target="confirmar_password">
+      <img src="./img/icons/ojo-visible.svg" alt="Mostrar">
+</button>
     <span class="tooltip-error"></span>
         </label>
         <button type="submit">Registrarse</button>
@@ -181,5 +225,8 @@ foreach ($paises as $p) {
 </main>
 </body>
 </html>
+
+
 <?php include 'inc/footer.php'; ?>
+
 
