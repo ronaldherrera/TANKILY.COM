@@ -272,6 +272,7 @@ select:focus {
 
 
 form label {
+  position: relative;
   display: block;
   margin-bottom: 1rem;
   font-weight: 300;
@@ -281,7 +282,7 @@ form label {
 input:-webkit-autofill {
   background-color: transparent !important;
   -webkit-box-shadow: 0 0 0 1000px transparent inset !important; /* color de fondo del contenedor */
-  -webkit-text-fill-color: #fff !important; /* color del texto */
+  -webkit-text-fill-color: #000A11 !important; /* color del texto */
   transition: background-color 5000s ease-in-out 0.4s;
 }
 
@@ -303,8 +304,6 @@ form input {
   margin-top: 0.3rem;
   box-sizing: border-box;
   font-size: 1rem;
-  background-color: transparent;
-  color: inherit;
 }
 
 button[type="submit"] {
@@ -324,7 +323,48 @@ button[type="submit"]:hover {
   background-color: #fff;
   color: #152D41;
 }
-
+  
+  
+.form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row label {
+            flex: 1;
+        }
+    .input-error {
+    border: 1px solid red;
+    background-image: url('./img/check-malo.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2rem;
+}
+.input-success {
+    border: 1px solid #ccc;
+    background-image: url('/img/check-bueno.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2rem;
+}
+.tooltip-error {
+    position: absolute;
+    background-color: #f44336;
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    z-index: 999;
+    margin-top: 2px;
+    display: none;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: break-word;
+}  
+  
+  
 ul.errores {
   background-color: #ffecec;
   border-left: 4px solid #d10000;
