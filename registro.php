@@ -5,8 +5,10 @@ $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pais = trim($_POST['pais'] ?? '');
-    $edad = intval($_POST['edad'] ?? 0);
-  $nacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nacimiento);
+ 
+  $fecha_nacimiento = $_POST['edad'] ?? '';
+$nacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nacimiento);
+
 $edad = (new DateTime())->diff($nacimiento)->y;
 
     $nombre = trim($_POST['nombre'] ?? '');
@@ -47,16 +49,17 @@ $edad = (new DateTime())->diff($nacimiento)->y;
     // Si no hay errores, registrar usuario
     if (empty($errores)) {
         $contrasena_hash = password_hash($password, PASSWORD_DEFAULT);
-        $avatares = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png'];
-        $avatar = '/img/avatars/' . $avatares[array_rand($avatares)];
+        $numero = rand(1, 10);
+        $avatar = "/img/avatars/avatar_default ($numero).png";
 
-        $stmt = $db->prepare('INSERT INTO usuarios (pais, edad, nombre, username, email, contrasena, avatar) VALUES (?, ?, ?, ?, ?, ?, ?)');
+
+        $stmt = $db->prepare('INSERT INTO usuarios (pais, fecha_nacimiento, nombre, username, email, contrasena, foto_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)');
         try {
-            $stmt->execute([$pais, $edad, $nombre, $username, $email, $contrasena_hash, $avatar]);
+            $stmt->execute([$pais, $fecha_nacimiento, $nombre, $username, $email, $contrasena_hash, $avatar]);
             header('Location: mi-cuenta.php');
             exit;
         } catch (PDOException $e) {
-            $errores[] = 'Error al registrar el usuario';
+            $errores[] = 'Error al registrar el usuario: ' . $e->getMessage();
         }
     }
 }
