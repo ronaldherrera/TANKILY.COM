@@ -79,8 +79,8 @@ $edad = (new DateTime())->diff($nacimiento)->y;
             if (input) {
                 const isPassword = input.type === 'password';
                 input.type = isPassword ? 'text' : 'password';
-                const svgVisible = '<img src="./img/icons/ojo-visible.svg" alt="Mostrar">';
-                const svgHidden = '<img src="./img/icons/ojo-oculto.svg" alt="Ocultar">';
+                const svgVisible = '<img src="./img/ojo-visible.svg" alt="Mostrar">';
+                const svgHidden = '<img src="./img/ojo-oculto.svg" alt="Ocultar">';
 
               
               btn.innerHTML = isPassword ? svgHidden : svgVisible;
@@ -207,7 +207,7 @@ foreach ($paises as $p) {
         <label>Contraseña:
     <input type="password" name="password" id="password" required autocomplete="new-password">
     <button type="button" class="toggle-password" data-target="password">
-      <img src="./img/icons/ojo-visible.svg" alt="Mostrar">
+      <img src="./img/ojo-visible.svg" alt="Mostrar">
 </button>
     <span class="tooltip-error"></span>
         </label>
@@ -215,7 +215,7 @@ foreach ($paises as $p) {
     <input type="password" name="confirmar_password" id="confirmar_password" required autocomplete="new-password">
 
     <button type="button" class="toggle-password" data-target="confirmar_password">
-      <img src="./img/icons/ojo-visible.svg" alt="Mostrar">
+      <img src="./img/ojo-visible.svg" alt="Mostrar">
 </button>
     <span class="tooltip-error"></span>
         </label>
