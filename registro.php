@@ -71,7 +71,133 @@ $edad = (new DateTime())->diff($nacimiento)->y;
     <link rel="stylesheet" href="css/style.css">
 
 <script>
+    
     document.addEventListener('DOMContentLoaded', () => {
+        
+        const paisSelect = document.querySelector('select[name="pais"]');
+paisSelect.addEventListener('change', () => {
+    const tooltip = paisSelect.parentElement.querySelector('.tooltip-error');
+
+    if (!paisSelect.value) {
+        paisSelect.setCustomValidity('El país es obligatorio');
+        paisSelect.classList.add('input-error');
+        paisSelect.classList.remove('input-success');
+        if (tooltip) {
+            tooltip.textContent = paisSelect.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        paisSelect.setCustomValidity('');
+        paisSelect.classList.remove('input-error');
+        paisSelect.classList.add('input-success');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+        
+        const edadInput = document.querySelector('input[name="edad"]');
+edadInput.addEventListener('input', () => {
+    const tooltip = edadInput.parentElement.querySelector('.tooltip-error');
+    const nacimiento = new Date(edadInput.value);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    const esMenor = edad < 18 || (edad === 18 && mes < 0);
+
+    if (isNaN(nacimiento) || esMenor) {
+        edadInput.setCustomValidity('Debes ser mayor de edad para registrarte');
+        edadInput.classList.add('input-error');
+        edadInput.classList.remove('input-success');
+        if (tooltip && tooltip.classList.contains('tooltip-error')) {
+            tooltip.textContent = edadInput.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        edadInput.setCustomValidity('');
+        edadInput.classList.remove('input-error');
+        edadInput.classList.add('input-success');
+        if (tooltip && tooltip.classList.contains('tooltip-error')) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+        
+        const nombreInput = document.querySelector('input[name="nombre"]');
+nombreInput.addEventListener('input', () => {
+    const value = nombreInput.value.trim();
+    const tooltip = nombreInput.parentElement.querySelector('.tooltip-error');
+
+    if (!/^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/.test(value)) {
+        nombreInput.setCustomValidity('El nombre solo puede contener letras');
+        nombreInput.classList.add('input-error');
+        nombreInput.classList.remove('input-success');
+        if (tooltip) {
+            tooltip.textContent = nombreInput.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        nombreInput.setCustomValidity('');
+        nombreInput.classList.remove('input-error');
+        nombreInput.classList.add('input-success');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+const usernameInput = document.querySelector('input[name="username"]');
+usernameInput.addEventListener('input', () => {
+    const value = usernameInput.value.trim();
+    const tooltip = usernameInput.parentElement.querySelector('.tooltip-error');
+    const pattern = /^[a-z0-9_.-]+$/;
+
+    if (!pattern.test(value)) {
+        usernameInput.setCustomValidity('Solo minúsculas, números y - _ . sin espacios');
+        usernameInput.classList.add('input-error');
+        usernameInput.classList.remove('input-success');
+        if (tooltip) {
+            tooltip.textContent = usernameInput.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        usernameInput.setCustomValidity('');
+        usernameInput.classList.remove('input-error');
+        usernameInput.classList.add('input-success');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+const emailInput = document.querySelector('input[name="email"]');
+emailInput.addEventListener('input', () => {
+    const value = emailInput.value.trim();
+    const tooltip = emailInput.parentElement.querySelector('.tooltip-error');
+
+    if (!/^\S+@\S+\.\S+$/.test(value)) {
+        emailInput.setCustomValidity('Introduce un correo electrónico válido');
+        emailInput.classList.add('input-error');
+        emailInput.classList.remove('input-success');
+        if (tooltip) {
+            tooltip.textContent = emailInput.validationMessage;
+            tooltip.style.display = 'block';
+        }
+    } else {
+        emailInput.setCustomValidity('');
+        emailInput.classList.remove('input-error');
+        emailInput.classList.add('input-success');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    }
+});
+
+        
+        
     const toggleButtons = document.querySelectorAll('.toggle-password');
     toggleButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -186,6 +312,7 @@ foreach ($paises as $p) {
 }
 ?>
                 </select>
+                <span class="tooltip-error"></span>
             </label>
             <label>Edad:
     <input type="date" name="edad" min="18" required autocomplete="off">

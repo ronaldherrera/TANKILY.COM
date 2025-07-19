@@ -227,7 +227,7 @@ select {
   height: 40px;
   width: 100%;
   padding: 0.3rem 0.7rem;
-
+  color: #000A11;
   border: 2px solid #39B6C6;
   border-radius: 6px;
   font-size: 1rem;
@@ -235,7 +235,7 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6H0z' fill='%23000000'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6H0z' fill='%23000A11'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.7rem center;
   background-size: 10px 6px;
@@ -265,8 +265,7 @@ select::-webkit-scrollbar-button {
 /* Elimina el borde azul al enfocar */
 select:focus {
   outline: none;
-  
-  background-color: #152D41;
+
 }
 
 
@@ -304,6 +303,7 @@ form input {
   box-sizing: border-box;
   font-size: 1rem;
   font-family: 'Segoe UI', sans-serif;
+  color: #000A11;
 }
 
 button[type="submit"] {
