@@ -508,6 +508,14 @@ input[type="checkbox"] {
   display: block;
 }
 
+.mi-cuenta fieldset {
+    background-color: #fff;
+}
+
+.mi-cuenta form label {
+    color: #000;
+}
+
 
 
     
