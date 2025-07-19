@@ -79,8 +79,8 @@ $edad = (new DateTime())->diff($nacimiento)->y;
             if (input) {
                 const isPassword = input.type === 'password';
                 input.type = isPassword ? 'text' : 'password';
-                const svgVisible = '<img src="./img/ojo-visible.svg" alt="Mostrar">';
-                const svgHidden = '<img src="./img/ojo-oculto.svg" alt="Ocultar">';
+                const svgVisible = '<img src="./img/ojo-visible.svg" alt="Mostrar" class="mostrar-boton">';
+                const svgHidden = '<img src="./img/ojo-oculto.svg" alt="Ocultar" class="mostrar-boton">';
 
               
               btn.innerHTML = isPassword ? svgHidden : svgVisible;

@@ -572,9 +572,11 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.mostrar-boton{
+form img.mostrar-boton {
     width: 20px;
-    height: auto;
+    margin-top: 7px;
+    align-items: center;
+
 }
 
     
