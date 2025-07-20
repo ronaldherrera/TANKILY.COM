@@ -58,9 +58,10 @@ $edad = (new DateTime())->diff($nacimiento)->y;
             $stmt->execute([$pais, $fecha_nacimiento, $nombre, $username, $email, $contrasena_hash, $avatar]);
             
             session_start();
-    $_SESSION['usuario'] = $username;
+            $_SESSION['usuario'] = $username;
+            $_SESSION['usuario_id'] = $db->lastInsertId(); // ← Añade esto
             
-            header('Location: /usuarios/mi_cuenta.php');
+            header('Location: usuarios/mi_cuenta.php');
             exit;
         } catch (PDOException $e) {
             $errores[] = 'Error al registrar el usuario: ' . $e->getMessage();
