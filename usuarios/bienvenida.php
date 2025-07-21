@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar'])) {
     $foto_perfil = $usuario['foto_perfil'];
     if (!empty($_FILES['foto']['name'])) {
     $destino = '../uploads/perfiles/';
-    $nombre_archivo = 'perfil_' . $_SESSION['usuario_id'] . '.jpg'; // Fuerza JPG
+    $nombre_archivo = 'perfil_' . $_SESSION['usuario_id'] . '.webp'; // Fuerza JPG
     $ruta_completa = $destino . $nombre_archivo;
 
     $tipo = mime_content_type($_FILES['foto']['tmp_name']);
