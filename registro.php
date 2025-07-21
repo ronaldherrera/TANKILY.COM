@@ -50,7 +50,7 @@ $edad = (new DateTime())->diff($nacimiento)->y;
     if (empty($errores)) {
         $contrasena_hash = password_hash($password, PASSWORD_DEFAULT);
         $numero = rand(1, 10);
-        $avatar = "/img/avatars/avatar_default ($numero).png";
+        $avatar = "/img/avatars/avatar_default ($numero).webp";
 
 
         $stmt = $db->prepare('INSERT INTO usuarios (pais, fecha_nacimiento, nombre, username, email, contrasena, foto_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)');
